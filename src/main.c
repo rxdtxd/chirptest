@@ -5,9 +5,8 @@
 
 #include <stdbool.h>
 #include <util/delay.h>
-#include <util/twi.h>   // i2c
 
-//#include "i2c.h"
+#include "i2c.h"
 #include "iocontrol.h"
 #include "uart.h" // debug terminal
 
@@ -15,8 +14,8 @@
 int main (void) {
     uint8_t i = 0;
     
-    led_init();
-//    i2c_init();
+//    led_init();
+    i2c_init();
     
     // debug
     uart_init();
