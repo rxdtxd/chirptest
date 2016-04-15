@@ -86,7 +86,7 @@ PROJECTNAME=chirptest
 # (list all files to compile, e.g. 'a.c b.cpp as.S'):
 # Use .cc, .cpp or .C suffix for C++ files, use .S 
 # (NOT .s !!!) for assembly source code files.
-PRJSRC=main.c uart.c I2C-master-lib/i2c_master.c
+PRJSRC=main.c uart.c i2cmaster/i2cmaster.S
 
 # additional includes (e.g. -I/path/to/mydir)
 INC=-I.
