@@ -23,7 +23,9 @@
 
 int main (void) {
     uint8_t i = 0;
+    uint8_t ret;
     uint8_t data[2];
+    uint16_t tmp;
     
 //    led_init();
     i2c_init();
@@ -38,14 +40,26 @@ int main (void) {
 	i2c_write(CHIRP_CAP_REG);
 	i2c_stop();
 	printf("debug stopped\n");
+
+	_delay_us(20);
 	
 	printf("debug receive\n");
-	i2c_receive(CHIRP_ADDR, data, CHIRP_DATALEN);
+	ret = i2c_receive(CHIRP_WRITE, data, CHIRP_DATALEN);
+	/* i2c_start(CHIRP_WRITE); */
+	/* i2c_write(CHIRP_CAP_REG); */
+	/* i2c_start(CHIRP_READ); */
+        /* data[0] = i2c_read_ack(); */
+	/* data[1] = i2c_read_nack(); */
+	/* i2c_stop(); */
+
+	tmp = (uint16_t)data[0]<<8;
+	tmp |= (uint16_t)data[1];
 	
-	printf("i: %u; data[0]: %u; data[1]: %u\n", i, data[0], data[1]);
+	printf("i: %u ret: %u; data: %x %x (%u)\n",
+	       i, ret, data[0], data[1], tmp);
 	
 	i++;
-//	_delay_ms(1.0);
+	_delay_ms(10);
     }
 
     
