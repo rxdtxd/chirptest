@@ -35,27 +35,21 @@ int main (void) {
     stdout = &uart_output;
 
     while (1) {
-	printf("debug start\n");
+	// request read cap reg
 	i2c_start(CHIRP_WRITE);
 	i2c_write(CHIRP_CAP_REG);
 	i2c_stop();
-	printf("debug stopped\n");
 
-	_delay_us(20);
+	// not necessary, eh?
+	//_delay_us(20);
 	
-	printf("debug receive\n");
+	// 
 	ret = i2c_receive(CHIRP_WRITE, data, CHIRP_DATALEN);
-	/* i2c_start(CHIRP_WRITE); */
-	/* i2c_write(CHIRP_CAP_REG); */
-	/* i2c_start(CHIRP_READ); */
-        /* data[0] = i2c_read_ack(); */
-	/* data[1] = i2c_read_nack(); */
-	/* i2c_stop(); */
 
 	tmp = (uint16_t)data[0]<<8;
 	tmp |= (uint16_t)data[1];
 	
-	printf("i: %u ret: %u; data: %x %x (%u)\n",
+	printf("i: %u\tret: %u\tdata: %02x %02x (%u)\n",
 	       i, ret, data[0], data[1], tmp);
 	
 	i++;
